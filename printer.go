@@ -6,7 +6,6 @@ package treeprinter
 const (
 	newLine      = "\n"
 	emptySpace   = "    "
-	middleItem   = "├── "
 	continueItem = "│   "
 	lastItem     = "└── "
 )
@@ -55,20 +54,12 @@ func printSuccs(succs []*Node, spaces []bool) string {
 
 func printText(text string, spaces []bool) string {
 	var result string
-	last := true
 	for _, space := range spaces {
 		if space {
 			result += emptySpace
 		} else {
 			result += continueItem
 		}
-		last = space
 	}
-
-	indicator := middleItem
-	if last {
-		indicator = lastItem
-	}
-
-	return result + indicator + text + newLine
+	return result + lastItem + text + newLine
 }
