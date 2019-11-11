@@ -8,17 +8,44 @@ import (
 
 func Example() {
 	trie := &trieNode{letter: ' ', succs: make(map[rune]*trieNode)}
-	for _, w := range []string{"FOOL", "FOOD", "FOOLISH", "FAMOUS", "SAVOUR", "SAD", "SAND"} {
+	for _, w := range []string{"FOOD", "FOOL", "FAIL", "FOOLISH", "SAD", "SWAM"} {
 		trie.addSuccessive(w)
 	}
 	fmt.Println(trie)
+	// Prints:
+	// root
+	// └──F
+	// │  └──O
+	// │  │  └──O
+	// │  │     └──D
+	// │  │     │  └──
+	// │  │     └──L
+	// │  │        └──
+	// │  │        └──I
+	// │  │           └──S
+	// │  │              └──H
+	// │  │                 └──
+	// │  └──A
+	// │     └──I
+	// │        └──L
+	// │           └──
+	// └──S
+	//    └──A
+	// │     └──D
+	// │        └──
+	// └──W
+	//    └──A
+	//       └──M
+	//          └──
 }
 
+// trieNode is a basic trie.
 type trieNode struct {
 	letter rune
 	succs  map[rune]*trieNode
 }
 
+// addSuccess adds words to a trie.
 func (tn *trieNode) addSuccessive(s string) {
 	if len(s) == 0 {
 		tn.succs[' '] = &trieNode{}
@@ -31,8 +58,8 @@ func (tn *trieNode) addSuccessive(s string) {
 	tn.succs[r].addSuccessive(s[1:])
 }
 
-// String prints the trie with a prettifier, so that it shows up nicely in the
-// terminal.
+// String prints the trie with the treeprinter prettifier, so that it shows up
+// nicely in the terminal.
 func (t *trieNode) String() string {
 	root := treeprinter.New("root")
 	var dfs func(level *trieNode) *treeprinter.Node

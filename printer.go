@@ -5,9 +5,9 @@ package treeprinter
 
 const (
 	newLine      = "\n"
-	emptySpace   = "    "
-	continueItem = "│   "
-	lastItem     = "└── "
+	emptySpace   = "   "
+	continueItem = "│  "
+	lastItem     = "└──"
 )
 
 // A node holds some text and references to other nodes.
